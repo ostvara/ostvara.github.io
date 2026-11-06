@@ -4,222 +4,180 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>OSTVARA — Creative Technology Studio</title>
-<meta name="description" content="OSTVARA: estudio independiente de diseño creativo y tecnología. Videojuegos, web, software, branding y 3D.">
+<meta name="description" content="Games, software and 3D assets — engineered like instruments, shaped like stories.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@300;400&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#0A0A0A; --panel:#0F0F10; --line:#1A1A1A;
-  --text:#FAFAFA; --silver:#B8B8C0; --gray:#9A9AA0;
-  --accent:#6d4aff;
+  --bg:#0A0A0A; --text:#FAFAFA; --silver:#B8B8C0; --accent:#6d4aff;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;line-height:1.6;overflow-x:hidden}
-h1,h2,h3,.display{font-family:'Space Grotesk',sans-serif}
-a{color:inherit;text-decoration:none}
-.container{max-width:1400px;margin:0 auto;padding:0 1.5rem}
-@media(min-width:1024px){.container{padding:0 6rem}}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-weight:300;line-height:1.6;overflow-x:hidden}
+h1,h2,h3{font-family:'Space Grotesk',sans-serif}
 
-/* ===== NAV ===== */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,10,10,.8);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
-.nav-inner{display:flex;justify-content:space-between;align-items:center;height:64px}
-.logo{font-family:'Space Grotesk';font-weight:700;font-size:1.2rem;letter-spacing:.05em}
-.logo span{color:var(--accent)}
-nav ul{display:none;gap:2rem;list-style:none}
-nav a.nav-link{font-size:.85rem;color:var(--silver);transition:color .2s}
-nav a.nav-link:hover{color:var(--text)}
-@media(min-width:768px){nav ul{display:flex}}
+/* Header */
+header{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.5rem 3rem;mix-blend-mode:difference}
+.logo{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.1rem;letter-spacing:.2em;text-decoration:none;color:var(--text)}
+nav a{color:var(--silver);text-decoration:none;font-size:.8rem;letter-spacing:.15em;margin-left:2rem;text-transform:uppercase;transition:color .3s}
+nav a:hover{color:var(--accent)}
 
-/* ===== HERO ===== */
-.hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden}
-.mesh{position:absolute;inset:0;pointer-events:none}
-.blob{position:absolute;border-radius:50%;filter:blur(90px);animation:drift 20s ease-in-out infinite alternate}
-.blob-1{width:50vw;height:50vw;background:rgba(109,74,255,.13);top:-15%;left:-10%}
-.blob-2{width:40vw;height:40vw;background:rgba(184,184,192,.06);bottom:-10%;right:-5%;animation-delay:-8s}
-@keyframes drift{from{transform:translate(0,0) scale(1)}to{transform:translate(8%,10%) scale(1.15)}}
-.grid-lines{position:absolute;inset:0;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:80px 80px;opacity:.35;pointer-events:none}
-.hero-content{position:relative;z-index:2}
-.eyebrow{font-size:.8rem;letter-spacing:.35em;text-transform:uppercase;color:var(--silver)}
-.hero h1{font-size:clamp(4rem,12vw,9rem);font-weight:700;letter-spacing:-.02em;line-height:1;margin:.5rem 0 1.5rem;
-  background:linear-gradient(180deg,#FAFAFA 60%,#B8B8C0);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.hero .tagline{font-size:clamp(1.1rem,2.2vw,1.5rem);color:#D0D0D5;max-width:34rem;margin-bottom:2.5rem}
-.btn-row{display:flex;gap:1rem;flex-wrap:wrap}
-.btn{display:inline-block;padding:.9rem 2rem;font-family:'Space Grotesk';font-weight:500;font-size:1rem;cursor:pointer;transition:all .25s ease;border-radius:3px}
-.btn-solid{background:var(--text);color:#000}
-.btn-solid:hover{transform:translateY(-2px);box-shadow:0 0 30px rgba(250,250,250,.15)}
-.btn-accent{background:var(--accent);color:#fff}
-.btn-accent:hover{box-shadow:0 0 30px rgba(109,74,255,.45);transform:translateY(-2px)}
-.btn-outline{border:1px solid var(--text);color:var(--text);background:transparent}
-.btn-outline:hover{background:var(--accent);border-color:var(--accent)}
-.scroll-hint{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);width:1px;height:48px;background:var(--silver);opacity:.5;animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{transform:translateX(-50%) scaleY(1)}50%{transform:translateX(-50%) scaleY(.5)}}
+/* Hero */
+.hero{height:100vh;position:relative;display:flex;flex-direction:column;justify-content:flex-end;padding:0 3rem 6rem}
+.hero-bg{position:absolute;inset:0;background:url('img/proyecto1.jpg') center/cover;opacity:.35;filter:saturate(.7)}
+.hero::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,var(--bg) 5%,transparent 60%)}
+.hero > *{position:relative;z-index:2}
+.kicker{font-size:.75rem;letter-spacing:.25em;text-transform:uppercase;color:var(--silver);margin-bottom:1rem}
+.hero h1{font-size:clamp(3.5rem,12vw,10rem);font-weight:700;letter-spacing:-.02em;line-height:.95}
+.hero .tagline{max-width:560px;margin-top:2rem;color:var(--silver);font-size:1.05rem}
 
-/* ===== REVEAL ANIMATION ===== */
-.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
-.reveal.visible{opacity:1;transform:none}
+/* Contador de coordenadas */
+.coords{position:fixed;bottom:1.5rem;right:2rem;z-index:90;font-family:'Space Grotesk',sans-serif;font-size:.72rem;letter-spacing:.15em;color:var(--accent);text-align:right;pointer-events:none;white-space:pre-line}
 
-/* ===== MARQUEE ===== */
-.marquee{border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;white-space:nowrap;padding:1.1rem 0}
-.marquee-track{display:inline-block;animation:scroll 30s linear infinite;font-family:'Space Grotesk';letter-spacing:.2em;color:var(--silver);opacity:.75}
-.marquee-track b{color:var(--accent);font-weight:400;padding:0 1.5rem}
-@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+/* Secciones numeradas */
+.chapter{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid rgba(109,74,255,.35)}
+.chapter .visual{position:relative;overflow:hidden;min-height:60vh}
+.chapter .visual img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s ease}
+.chapter:hover .visual img{transform:scale(1.04)}
+.chapter .content{display:flex;flex-direction:column;justify-content:center;padding:6rem 5rem}
+.chapter:nth-child(even) .visual{order:2}
+.num{font-family:'Space Grotesk',sans-serif;font-size:.75rem;letter-spacing:.25em;color:var(--accent);text-transform:uppercase;margin-bottom:1.5rem}
+.chapter h2{font-size:clamp(2.2rem,4.5vw,3.8rem);font-weight:700;letter-spacing:-.01em;margin-bottom:1.5rem}
+.chapter p{color:var(--silver);max-width:420px}
 
-/* ===== SECTIONS ===== */
-section{padding:6rem 0}
-@media(min-width:1024px){section{padding:8rem 0}}
-.section-label{font-size:.75rem;letter-spacing:.35em;text-transform:uppercase;color:var(--accent);margin-bottom:.75rem}
-.section-title{font-size:clamp(2rem,5vw,3.5rem);font-weight:700;letter-spacing:-.02em;margin-bottom:3rem}
+/* Capabilities */
+.caps{padding:10rem 3rem;border-bottom:1px solid rgba(109,74,255,.35)}
+.caps .num{margin-bottom:3rem}
+.cap-list{list-style:none;max-width:1100px;margin:0 auto}
+.cap-list li{display:flex;justify-content:space-between;align-items:baseline;padding:1.8rem 0;border-bottom:1px solid rgba(184,184,192,.15);font-family:'Space Grotesk',sans-serif;font-size:clamp(1.4rem,3vw,2.4rem);font-weight:500;transition:padding-left .3s,color .3s}
+.cap-list li:hover{padding-left:1.5rem;color:var(--accent)}
+.cap-list li span{font-family:'Inter',sans-serif;font-size:.8rem;font-weight:300;letter-spacing:.1em;color:var(--silver);text-transform:uppercase}
 
-/* SERVICES */
-.services-grid{display:grid;gap:1rem;grid-template-columns:1fr}
-@media(min-width:640px){.services-grid{grid-template-columns:repeat(2,1fr)}}
-@media(min-width:1024px){.services-grid{grid-template-columns:repeat(3,1fr)}}
-.card{background:var(--panel);border:1px solid var(--line);padding:2rem;border-radius:4px;position:relative;transition:transform .3s ease,border-color .3s ease}
-.card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--accent);opacity:0;transition:opacity .3s}
-.card:hover{transform:translateY(-4px);border-color:var(--accent)}
-.card:hover::before{opacity:1}
-.card svg{width:40px;height:40px;stroke:var(--silver);margin-bottom:1.25rem;transition:stroke .3s}
-.card:hover svg{stroke:var(--accent)}
-.card h3{font-size:1.25rem;margin-bottom:.5rem}
-.card p{font-size:.92rem;color:var(--gray)}
+/* CTA final */
+.cta{min-height:90vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:6rem 2rem}
+.cta h2{font-size:clamp(3rem,8vw,7rem);font-weight:700;letter-spacing:-.02em;margin-bottom:2.5rem}
+.btn{display:inline-block;background:var(--accent);color:var(--text);text-decoration:none;font-family:'Space Grotesk',sans-serif;font-weight:500;letter-spacing:.1em;padding:1.2rem 3.2rem;border-radius:999px;font-size:1rem;transition:transform .3s,box-shadow .3s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 10px 40px rgba(109,74,255,.45)}
 
-/* PORTFOLIO */
-.portfolio-grid{display:grid;gap:1.5rem}
-@media(min-width:900px){.portfolio-grid{grid-template-columns:repeat(3,1fr)}}
-.project{position:relative;border:1px solid var(--line);border-radius:4px;overflow:hidden;aspect-ratio:4/3;background:var(--panel)}
-.project img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease;display:block}
-.project:hover img{transform:scale(1.06)}
-.project .overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,10,10,.95) 0%,rgba(10,10,10,.3) 55%,transparent 100%);display:flex;flex-direction:column;justify-content:flex-end;padding:1.5rem;transition:background .3s}
-.project:hover .overlay{background:linear-gradient(to top,rgba(10,10,10,.9) 0%,rgba(10,10,10,.15) 55%,transparent 100%)}
-.project .cat{font-size:.72rem;letter-spacing:.25em;text-transform:uppercase;color:var(--accent);margin-bottom:.35rem}
-.project h3{font-size:1.5rem}
-.project p{font-size:.88rem;color:var(--silver);margin-top:.35rem}
-.badge{position:absolute;top:1rem;right:1rem;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;padding:.35rem .8rem;border:1px solid rgba(250,250,250,.25);background:rgba(10,10,10,.5);border-radius:99px;color:var(--silver);opacity:.6;transition:opacity .3s}
-.project:hover .badge{opacity:1}
+footer{padding:2rem 3rem;display:flex;justify-content:space-between;font-size:.75rem;letter-spacing:.1em;color:var(--silver);border-top:1px solid rgba(184,184,192,.1)}
 
-/* ABOUT */
-.about-split{display:grid;gap:3rem;grid-template-columns:1fr}
-@media(min-width:900px){.about-split{grid-template-columns:1fr 1fr;align-items:center}}
-.about-split p{color:var(--gray);margin-bottom:1rem}
-.about-img{border:1px solid var(--line);border-radius:4px;overflow:hidden}
-.about-img img{width:100%;display:block}
-.stats{display:flex;gap:3rem;flex-wrap:wrap;margin-top:4rem}
-.stat .num{font-family:'Space Grotesk';font-size:clamp(2rem,4vw,3rem);font-weight:700;color:var(--accent)}
-.stat .lbl{font-size:.85rem;color:var(--gray);text-transform:uppercase;letter-spacing:.15em}
+/* Animación de entrada */
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .9s ease,transform .9s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
 
-/* CONTACT */
-.contact{text-align:center}
-.contact h2{font-size:clamp(2.5rem,6vw,4.5rem);letter-spacing:-.02em;margin-bottom:1rem}
-.contact .sub{color:var(--gray);margin-bottom:2.5rem}
-.contact .email{display:inline-block;margin-top:1.5rem;font-family:'Space Grotesk';font-size:1.2rem;color:var(--silver);border-bottom:1px solid transparent;transition:all .2s}
-.contact .email:hover{color:var(--text);border-bottom-color:var(--accent)}
-
-footer{border-top:1px solid var(--line);padding:2rem 0;display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;font-size:.85rem;color:var(--gray)}
-footer a:hover{color:var(--text)}
-
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+@media(max-width:800px){
+  header{padding:1.2rem 1.5rem}
+  nav a{margin-left:1rem;font-size:.7rem}
+  .hero{padding:0 1.5rem 5rem}
+  .chapter{grid-template-columns:1fr}
+  .chapter:nth-child(even) .visual{order:0}
+  .chapter .content{padding:3rem 1.5rem}
+  .caps{padding:5rem 1.5rem}
+  .coords{display:none}
+}
 </style>
 </head>
 <body>
 
-<nav><div class="container nav-inner">
-  <a href="#" class="logo">OST<span>VARA</span></a>
-  <ul>
-    <li><a class="nav-link" href="#servicios">Servicios</a></li>
-    <li><a class="nav-link" href="#proyectos">Proyectos</a></li>
-    <li><a class="nav-link" href="#nosotros">Nosotros</a></li>
-    <li><a class="nav-link" href="#contacto">Contacto</a></li>
-  </ul>
-</div></nav>
-
-<header class="hero">
-  <div class="mesh"><div class="blob blob-1"></div><div class="blob blob-2"></div></div>
-  <div class="grid-lines"></div>
-  <div class="container hero-content">
-    <p class="eyebrow">Creative Technology Studio</p>
-    <h1>OSTVARA</h1>
-    <p class="tagline">Convertimos ideas en experiencias digitales con carácter: videojuegos, web, software y diseño 3D.</p>
-    <div class="btn-row">
-      <a class="btn btn-solid" href="#proyectos">Ver proyectos</a>
-      <a class="btn btn-outline" href="mailto:hello@ostvara.es">Contacto</a>
-    </div>
-  </div>
-  <div class="scroll-hint"></div>
+<header>
+  <a class="logo" href="#">OSTVARA</a>
+  <nav>
+    <a href="#studio">Studio</a>
+    <a href="#work">Work</a>
+    <a href="#capabilities">Capabilities</a>
+    <a href="#contact">Contact</a>
+  </nav>
 </header>
 
-<div class="marquee"><div class="marquee-track">
-  GAMES<b>•</b>WEB<b>•</b>SOFTWARE<b>•</b>BRANDING<b>•</b>3D<b>•</b>ROBLOX<b>•</b>UI/UX<b>•</b>GAMES<b>•</b>WEB<b>•</b>SOFTWARE<b>•</b>BRANDING<b>•</b>3D<b>•</b>ROBLOX<b>•</b>UI/UX<b>•</b>
-</div></div>
+<div class="coords" id="coords"></div>
 
-<section id="servicios"><div class="container">
-  <p class="section-label reveal">Lo que hacemos</p>
-  <h2 class="section-title reveal">Diseño y código,<br>bajo el mismo techo.</h2>
-  <div class="services-grid">
-    <div class="card reveal"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M6 9l-3 3 3 3M18 9l3 3-3 3M14 5l-4 14"/></svg><h3>Videojuegos</h3><p>Prototipos y juegos completos. Roblox/Luau, Unity, Godot. PC, móvil y web.</p></div>
-    <div class="card reveal"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18M8 21h8"/></svg><h3>Diseño web</h3><p>Sitios modernos, rápidos y con SEO. React, Vue o vanilla según necesites.</p></div>
-    <div class="card reveal"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M4 17l6-6-6-6M12 19h8"/></svg><h3>Software a medida</h3><p>Dashboards, automatizaciones e integraciones API. Automatizamos lo aburrido.</p></div>
-    <div class="card reveal"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 010 18M7 12h10"/></svg><h3>Branding</h3><p>Logotipos, sistemas visuales y guidelines. Marcas con alma digital.</p></div>
-    <div class="card reveal"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M12 2l8 5v10l-8 5-8-5V7l8-5zM12 12l8-5M12 12L4 7M12 12v10"/></svg><h3>Modelado 3D</h3><p>Assets optimizados, renders y visualizaciones. Blender, Three.js, AR.</p></div>
-    <div class="card reveal"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M14 3l7 7-9 9H5v-7l9-9zM3 21h18"/></svg><h3>Recursos para juegos</h3><p>Modelos, texturas y UI kits para Roblox y FiveM. Listos para integrar.</p></div>
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-bg"></div>
+  <p class="kicker reveal">Creative technology studio — Est. 2026</p>
+  <h1 class="reveal">OSTVARA</h1>
+  <p class="tagline reveal">Games, software and 3D assets — engineered like instruments, shaped like stories.</p>
+</section>
+
+<!-- 00 STUDIO -->
+<section class="chapter" id="studio">
+  <div class="content">
+    <p class="num reveal">00 / Studio</p>
+    <h2 class="reveal">We build worlds people play in, tools people trust, and objects that make both feel real.</h2>
   </div>
-</div></section>
+  <div class="visual"><img src="img/about.jpg" alt="OSTVARA studio" loading="lazy"></div>
+</section>
 
-<section id="proyectos" style="background:#0D0D0E"><div class="container">
-  <p class="section-label reveal">Proyectos</p>
-  <h2 class="section-title reveal">Selected Work</h2>
-  <div class="portfolio-grid">
-    <a class="project reveal" href="mailto:hello@ostvara.es">
-      <img src="img/proyecto1.jpg" alt="Urban RP">
-      <div class="overlay"><span class="cat">Videojuego</span><h3>Urban RP</h3><p>Mundo urbano interactivo en Roblox con economía emergente y 50+ assets propios.</p></div>
-      <span class="badge">En desarrollo</span>
-    </a>
-    <a class="project reveal" href="mailto:hello@ostvara.es">
-      <img src="img/proyecto2.jpg" alt="Cloud Dashboard">
-      <div class="overlay"><span class="cat">Software</span><h3>Cloud Dashboard</h3><p>Panel de monitorización en tiempo real con gráficas y alertas push.</p></div>
-      <span class="badge">Prototipo</span>
-    </a>
-    <a class="project reveal" href="mailto:hello@ostvara.es">
-      <img src="img/proyecto3.jpg" alt="Game Assets">
-      <div class="overlay"><span class="cat">3D</span><h3>Game Assets Pack</h3><p>Colección modular de 30+ modelos low-poly con texturas PBR 2K.</p></div>
-      <span class="badge">En desarrollo</span>
-    </a>
+<!-- 01 URBAN RP -->
+<section class="chapter" id="work">
+  <div class="visual"><img src="img/proyecto1.jpg" alt="Urban RP" loading="lazy"></div>
+  <div class="content">
+    <p class="num reveal">01 / Game — 2026</p>
+    <h2 class="reveal">Urban RP</h2>
+    <p class="reveal">A living, rain-soaked city built for roleplay. Systems, economy and stories written by its players.</p>
   </div>
-</div></section>
+</section>
 
-<section id="nosotros"><div class="container">
-  <div class="about-split">
-    <div>
-      <p class="section-label reveal">Quiénes somos</p>
-      <h2 class="section-title reveal">Diseñadores que programan.<br>Ingenieros que crean.</h2>
-      <p class="reveal">OSTVARA es un estudio independiente multidisciplinar donde diseño, ingeniería y producción 3D convergen. Somos híbridos: entendemos la estética y también la implementación técnica.</p>
-      <p class="reveal">Trabajamos en ciclos cortos: descubrimiento → prototipo → prueba → refinamiento. Sin burocracia, sin jerga, sin promesas vacías.</p>
-    </div>
-    <div class="about-img reveal"><img src="img/about.jpg" alt="Estudio OSTVARA"></div>
+<!-- 02 CLOUD DASHBOARD -->
+<section class="chapter">
+  <div class="visual"><img src="img/proyecto2.jpg" alt="Cloud Dashboard" loading="lazy"></div>
+  <div class="content">
+    <p class="num reveal">02 / Software — 2025</p>
+    <h2 class="reveal">Cloud Dashboard</h2>
+    <p class="reveal">Infrastructure made legible. A control surface for hundreds of services, in one calm view.</p>
   </div>
-  <div class="stats">
-    <div class="stat reveal"><div class="num">6</div><div class="lbl">Disciplinas</div></div>
-    <div class="stat reveal"><div class="num">3</div><div class="lbl">Proyectos activos</div></div>
-    <div class="stat reveal"><div class="num">24h</div><div class="lbl">Tiempo de respuesta</div></div>
+</section>
+
+<!-- 03 GAME ASSETS PACK -->
+<section class="chapter">
+  <div class="visual"><img src="img/proyecto3.jpg" alt="Game Assets Pack" loading="lazy"></div>
+  <div class="content">
+    <p class="num reveal">03 / 3D — 2025</p>
+    <h2 class="reveal">Game Assets Pack</h2>
+    <p class="reveal">Two hundred stylized props, game-ready. Hand-sculpted, optimized, drop-in.</p>
   </div>
-</div></section>
+</section>
 
-<section id="contacto" class="contact"><div class="container">
-  <p class="section-label reveal">Contacto</p>
-  <h2 class="reveal">¿Tienes un proyecto en mente?</h2>
-  <p class="sub reveal">Construyamos algo excepcional juntos.</p>
-  <a class="btn btn-accent reveal" href="mailto:hello@ostvara.es">Iniciar conversación</a>
-  <br><a class="email reveal" href="mailto:hello@ostvara.es">hello@ostvara.es</a>
-</div></section>
+<!-- 04 CAPABILITIES -->
+<section class="caps" id="capabilities">
+  <p class="num reveal">04 / Capabilities</p>
+  <ul class="cap-list">
+    <li class="reveal">Game Development <span>Roblox · Unity · Godot</span></li>
+    <li class="reveal">Software Engineering <span>Dashboards · Tools · APIs</span></li>
+    <li class="reveal">3D Asset Creation <span>Low-poly · PBR · Optimized</span></li>
+    <li class="reveal">World Design <span>Economy · Systems · Narrative</span></li>
+  </ul>
+</section>
 
-<footer><div class="container" style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem">
-  <span>© 2026 OSTVARA. All rights reserved.</span>
-  <span><a href="#servicios">Servicios</a> · <a href="#proyectos">Proyectos</a> · <a href="#nosotros">Nosotros</a></span>
-</div></footer>
+<!-- 05 CONTACTO -->
+<section class="cta" id="contact">
+  <p class="num reveal">05 / Signal</p>
+  <h2 class="reveal">Let's build worlds.</h2>
+  <a class="btn reveal" href="mailto:hello@ostvara.es">Start a project →</a>
+</section>
+
+<footer>
+  <span>© 2026 OSTVARA</span>
+  <span>hello@ostvara.es</span>
+</footer>
 
 <script>
-const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}}),{threshold:.12});
-document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+// Contador de coordenadas dinámico
+const coords = document.getElementById('coords');
+let t = 0;
+setInterval(() => {
+  t += 0.15;
+  const y = window.scrollY;
+  const lat = (40.4168 + Math.sin(t) * 0.5 + y * 0.0001).toFixed(4);
+  const lon = (-3.7038 + Math.cos(t * 0.8) * 0.5).toFixed(4);
+  coords.textContent = `LAT ${lat}° N\nLON ${Math.abs(lon)}° W\n● SCROLL DEPTH ${Math.min(100, Math.round(y / (document.body.scrollHeight - innerHeight) * 100))}%`;
+}, 120);
+
+// Reveal on scroll
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.15 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 </script>
 </body>
 </html>
