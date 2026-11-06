@@ -2,270 +2,224 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>OSTVARA — Creative Technology Studio</title>
-<meta name="description" content="OSTVARA — Creative Technology Studio. Videojuegos, web, software y diseño 3D. Ideas que se convierten en experiencias digitales.">
-<meta property="og:title" content="OSTVARA — Creative Technology Studio">
-<meta property="og:description" content="Videojuegos, web, software y diseño 3D. Ideas que se convierten en experiencias digitales.">
-<meta property="og:url" content="https://ostvara.es">
-<meta property="og:image" content="https://ostvara.es/img/proyecto1.jpg">
-<meta property="og:type" content="website">
+<meta name="description" content="OSTVARA: estudio independiente de diseño creativo y tecnología. Videojuegos, web, software, branding y 3D.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230A0A0A'/%3E%3Ccircle cx='16' cy='16' r='9' fill='none' stroke='%236d4aff' stroke-width='3'/%3E%3C/svg%3E">
-<script>document.documentElement.classList.add('js')</script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0A0A0A;--fg:#FAFAFA;--accent:#6d4aff;--silver:#B8B8C0;--line:#1A1A1A;--card:#0F0F10;--muted:#9A9AA0;--sub:#D0D0D5}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;background:var(--bg)}
-body{background:var(--bg);color:var(--fg);font-family:Inter,system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-h1,h2,h3,.display{font-family:'Space Grotesk',system-ui,sans-serif}
-svg{display:block;max-width:100%}
-a{color:inherit}
-:focus-visible{outline:1px solid var(--accent);outline-offset:3px}
-.wrap{padding:0 1.5rem;max-width:1400px;margin:0 auto}
-@media(min-width:1024px){.wrap{padding:0 6rem}}
-section{padding:7rem 0;border-bottom:1px solid var(--line);position:relative}
-.label{font-size:.75rem;letter-spacing:.25em;text-transform:uppercase;color:var(--silver);margin-bottom:1.25rem}
-h2{font-size:clamp(2rem,4.5vw,3.5rem);letter-spacing:-.02em;line-height:1.05;margin-bottom:3.5rem;max-width:18ch}
+:root{
+  --bg:#0A0A0A; --panel:#0F0F10; --line:#1A1A1A;
+  --text:#FAFAFA; --silver:#B8B8C0; --gray:#9A9AA0;
+  --accent:#6d4aff;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;line-height:1.6;overflow-x:hidden}
+h1,h2,h3,.display{font-family:'Space Grotesk',sans-serif}
+a{color:inherit;text-decoration:none}
+.container{max-width:1400px;margin:0 auto;padding:0 1.5rem}
+@media(min-width:1024px){.container{padding:0 6rem}}
 
-/* Hero */
-.hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
-.hero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:80px 80px;z-index:0}
-.blob{position:absolute;border-radius:50%;pointer-events:none;z-index:0;animation:drift 20s ease-in-out infinite alternate}
-.b1{width:60vmax;height:60vmax;left:-15vmax;top:-10vmax;background:radial-gradient(circle,rgba(109,74,255,.15),transparent 65%)}
-.b2{width:50vmax;height:50vmax;right:-12vmax;bottom:-12vmax;background:radial-gradient(circle,rgba(109,74,255,.15),transparent 65%);animation-delay:-7s}
-.b3{width:40vmax;height:40vmax;left:35%;top:30%;background:radial-gradient(circle,rgba(255,255,255,.05),transparent 65%);animation-delay:-13s}
-@keyframes drift{0%{transform:translate(0,0) scale(1)}100%{transform:translate(8vw,6vh) scale(1.12)}}
-.hero .wrap{position:relative;z-index:1}
-.hero h1{font-size:clamp(4rem,10vw,8rem);font-weight:700;letter-spacing:-.02em;line-height:.9;margin-bottom:1.75rem;background:linear-gradient(180deg,#FAFAFA 30%,#B8B8C0);-webkit-background-clip:text;background-clip:text;color:transparent}
-.tagline{font-size:clamp(1.2rem,2vw,1.5rem);color:var(--sub);max-width:34ch;margin-bottom:2.75rem}
-.anim{opacity:0;transform:translateY(20px);animation:up .6s ease-out forwards}
-.d1{animation-delay:.1s}.d2{animation-delay:.25s}.d3{animation-delay:.4s}.d4{animation-delay:.55s}
-@keyframes up{to{opacity:1;transform:none}}
-.btns{display:flex;gap:1rem;flex-wrap:wrap}
-.btn{display:inline-block;padding:.95rem 1.9rem;font:500 .95rem Inter,sans-serif;text-decoration:none;border-radius:4px;cursor:pointer;border:1px solid transparent;transition:box-shadow .3s,background .2s,color .2s,border-color .2s,transform .1s}
-.btn:active,.big-btn:active{transform:scale(.98)}
-.btn-primary{background:var(--accent);color:#FFF}
-.btn-primary:hover{box-shadow:0 0 30px rgba(109,74,255,.4)}
-.btn-ghost{border-color:var(--fg);color:var(--fg);background:transparent}
-.btn-ghost:hover{background:var(--fg);color:var(--bg)}
-.scroll-ind{position:absolute;left:50%;bottom:2.5rem;width:1px;height:70px;background:var(--silver);transform:translateX(-50%);opacity:.5;animation:pulse 2s ease-in-out infinite;z-index:1}
-@keyframes pulse{0%,100%{opacity:.2;transform:translateX(-50%) scaleY(.6)}50%{opacity:.9;transform:translateX(-50%) scaleY(1)}}
+/* ===== NAV ===== */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,10,10,.8);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav-inner{display:flex;justify-content:space-between;align-items:center;height:64px}
+.logo{font-family:'Space Grotesk';font-weight:700;font-size:1.2rem;letter-spacing:.05em}
+.logo span{color:var(--accent)}
+nav ul{display:none;gap:2rem;list-style:none}
+nav a.nav-link{font-size:.85rem;color:var(--silver);transition:color .2s}
+nav a.nav-link:hover{color:var(--text)}
+@media(min-width:768px){nav ul{display:flex}}
 
-/* Marquee */
-.marquee{overflow:hidden;white-space:nowrap;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:1.5rem 0;background:#070707}
-.track{display:inline-flex;animation:scroll 32s linear infinite}
-.track span{font:500 1rem 'Space Grotesk',sans-serif;letter-spacing:.2em;color:var(--silver);opacity:.6;padding-right:1.5rem}
-.track .dot{color:var(--accent);opacity:1;padding-right:1.5rem}
-@keyframes scroll{to{transform:translateX(-50%)}}
+/* ===== HERO ===== */
+.hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden}
+.mesh{position:absolute;inset:0;pointer-events:none}
+.blob{position:absolute;border-radius:50%;filter:blur(90px);animation:drift 20s ease-in-out infinite alternate}
+.blob-1{width:50vw;height:50vw;background:rgba(109,74,255,.13);top:-15%;left:-10%}
+.blob-2{width:40vw;height:40vw;background:rgba(184,184,192,.06);bottom:-10%;right:-5%;animation-delay:-8s}
+@keyframes drift{from{transform:translate(0,0) scale(1)}to{transform:translate(8%,10%) scale(1.15)}}
+.grid-lines{position:absolute;inset:0;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:80px 80px;opacity:.35;pointer-events:none}
+.hero-content{position:relative;z-index:2}
+.eyebrow{font-size:.8rem;letter-spacing:.35em;text-transform:uppercase;color:var(--silver)}
+.hero h1{font-size:clamp(4rem,12vw,9rem);font-weight:700;letter-spacing:-.02em;line-height:1;margin:.5rem 0 1.5rem;
+  background:linear-gradient(180deg,#FAFAFA 60%,#B8B8C0);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.hero .tagline{font-size:clamp(1.1rem,2.2vw,1.5rem);color:#D0D0D5;max-width:34rem;margin-bottom:2.5rem}
+.btn-row{display:flex;gap:1rem;flex-wrap:wrap}
+.btn{display:inline-block;padding:.9rem 2rem;font-family:'Space Grotesk';font-weight:500;font-size:1rem;cursor:pointer;transition:all .25s ease;border-radius:3px}
+.btn-solid{background:var(--text);color:#000}
+.btn-solid:hover{transform:translateY(-2px);box-shadow:0 0 30px rgba(250,250,250,.15)}
+.btn-accent{background:var(--accent);color:#fff}
+.btn-accent:hover{box-shadow:0 0 30px rgba(109,74,255,.45);transform:translateY(-2px)}
+.btn-outline{border:1px solid var(--text);color:var(--text);background:transparent}
+.btn-outline:hover{background:var(--accent);border-color:var(--accent)}
+.scroll-hint{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);width:1px;height:48px;background:var(--silver);opacity:.5;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{transform:translateX(-50%) scaleY(1)}50%{transform:translateX(-50%) scaleY(.5)}}
 
-/* Services */
-.grid{display:grid;gap:1.5rem;grid-template-columns:1fr}
-@media(min-width:640px){.grid{grid-template-columns:repeat(2,1fr)}}
-@media(min-width:1024px){.grid{grid-template-columns:repeat(3,1fr)}}
-.card{position:relative;background:var(--card);border:1px solid var(--line);border-radius:4px;padding:2.25rem;transition:border-color .3s,transform .3s ease}
-.card::before{content:"";position:absolute;left:-1px;right:-1px;top:-1px;height:2px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .35s ease;border-radius:4px 4px 0 0}
-.card:hover{border-color:var(--accent);transform:translateY(-4px)}
-.card:hover::before{transform:scaleX(1)}
-.card svg{width:48px;height:48px;margin-bottom:1.5rem;stroke:var(--silver);fill:none;stroke-width:1.5;transition:stroke .3s}
+/* ===== REVEAL ANIMATION ===== */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+.reveal.visible{opacity:1;transform:none}
+
+/* ===== MARQUEE ===== */
+.marquee{border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;white-space:nowrap;padding:1.1rem 0}
+.marquee-track{display:inline-block;animation:scroll 30s linear infinite;font-family:'Space Grotesk';letter-spacing:.2em;color:var(--silver);opacity:.75}
+.marquee-track b{color:var(--accent);font-weight:400;padding:0 1.5rem}
+@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ===== SECTIONS ===== */
+section{padding:6rem 0}
+@media(min-width:1024px){section{padding:8rem 0}}
+.section-label{font-size:.75rem;letter-spacing:.35em;text-transform:uppercase;color:var(--accent);margin-bottom:.75rem}
+.section-title{font-size:clamp(2rem,5vw,3.5rem);font-weight:700;letter-spacing:-.02em;margin-bottom:3rem}
+
+/* SERVICES */
+.services-grid{display:grid;gap:1rem;grid-template-columns:1fr}
+@media(min-width:640px){.services-grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1024px){.services-grid{grid-template-columns:repeat(3,1fr)}}
+.card{background:var(--panel);border:1px solid var(--line);padding:2rem;border-radius:4px;position:relative;transition:transform .3s ease,border-color .3s ease}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--accent);opacity:0;transition:opacity .3s}
+.card:hover{transform:translateY(-4px);border-color:var(--accent)}
+.card:hover::before{opacity:1}
+.card svg{width:40px;height:40px;stroke:var(--silver);margin-bottom:1.25rem;transition:stroke .3s}
 .card:hover svg{stroke:var(--accent)}
-.card h3{font-size:1.5rem;margin-bottom:.6rem}
-.card p{color:var(--muted);font-size:.95rem}
+.card h3{font-size:1.25rem;margin-bottom:.5rem}
+.card p{font-size:.92rem;color:var(--gray)}
 
-/* Portfolio */
-.work{display:grid;gap:1.5rem;grid-template-columns:1fr}
-@media(min-width:768px){.work{grid-template-columns:repeat(2,1fr)}}
-@media(min-width:1024px){.work{grid-template-columns:repeat(3,1fr)}}
-.proj{position:relative;overflow:hidden;border-radius:4px;border:1px solid var(--line);background:#141415;aspect-ratio:3/4;display:flex;flex-direction:column;justify-content:flex-end;isolation:isolate}
-.proj img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform .6s ease,filter .5s}
-.proj:hover img{transform:scale(1.05)}
-.proj::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(10,10,10,.95) 0%,rgba(10,10,10,.55) 45%,rgba(10,10,10,.15) 100%);z-index:-1;transition:opacity .5s}
-.proj:hover::after{opacity:.75}
-.proj:hover{border-color:var(--accent)}
-.proj .txt{padding:2rem}
-.cat{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:.6rem}
-.proj h3{font-size:clamp(1.8rem,3vw,2.4rem);line-height:1.1;margin-bottom:.6rem}
-.proj p{color:var(--sub);font-size:.95rem}
-.badge{position:absolute;top:1rem;right:1rem;border:1px solid var(--silver);color:var(--silver);background:rgba(10,10,10,.4);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;padding:.35rem .65rem;border-radius:2px;opacity:.5;transition:opacity .3s}
-.proj:hover .badge{opacity:1}
+/* PORTFOLIO */
+.portfolio-grid{display:grid;gap:1.5rem}
+@media(min-width:900px){.portfolio-grid{grid-template-columns:repeat(3,1fr)}}
+.project{position:relative;border:1px solid var(--line);border-radius:4px;overflow:hidden;aspect-ratio:4/3;background:var(--panel)}
+.project img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease;display:block}
+.project:hover img{transform:scale(1.06)}
+.project .overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,10,10,.95) 0%,rgba(10,10,10,.3) 55%,transparent 100%);display:flex;flex-direction:column;justify-content:flex-end;padding:1.5rem;transition:background .3s}
+.project:hover .overlay{background:linear-gradient(to top,rgba(10,10,10,.9) 0%,rgba(10,10,10,.15) 55%,transparent 100%)}
+.project .cat{font-size:.72rem;letter-spacing:.25em;text-transform:uppercase;color:var(--accent);margin-bottom:.35rem}
+.project h3{font-size:1.5rem}
+.project p{font-size:.88rem;color:var(--silver);margin-top:.35rem}
+.badge{position:absolute;top:1rem;right:1rem;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;padding:.35rem .8rem;border:1px solid rgba(250,250,250,.25);background:rgba(10,10,10,.5);border-radius:99px;color:var(--silver);opacity:.6;transition:opacity .3s}
+.project:hover .badge{opacity:1}
 
-/* About */
-.split{display:grid;gap:4rem;align-items:center}
-@media(min-width:1024px){.split{grid-template-columns:1fr 1fr}}
-.split h2{margin-bottom:2rem}
-.split p{color:var(--muted);margin-bottom:1.25rem;max-width:52ch}
-.frame{border:1px solid var(--line);border-radius:4px;overflow:hidden;aspect-ratio:4/5;background:#141415}
-.frame img{width:100%;height:100%;object-fit:cover;display:block}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:5rem;padding-top:3rem;border-top:1px solid var(--line)}
-.stat .num{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(2.5rem,5vw,4.5rem);line-height:1;letter-spacing:-.02em}
-.stat .lbl{font-size:.8rem;letter-spacing:.15em;text-transform:uppercase;color:var(--silver);margin-top:.6rem}
+/* ABOUT */
+.about-split{display:grid;gap:3rem;grid-template-columns:1fr}
+@media(min-width:900px){.about-split{grid-template-columns:1fr 1fr;align-items:center}}
+.about-split p{color:var(--gray);margin-bottom:1rem}
+.about-img{border:1px solid var(--line);border-radius:4px;overflow:hidden}
+.about-img img{width:100%;display:block}
+.stats{display:flex;gap:3rem;flex-wrap:wrap;margin-top:4rem}
+.stat .num{font-family:'Space Grotesk';font-size:clamp(2rem,4vw,3rem);font-weight:700;color:var(--accent)}
+.stat .lbl{font-size:.85rem;color:var(--gray);text-transform:uppercase;letter-spacing:.15em}
 
-/* Contact */
-.contact{text-align:center;overflow:hidden}
-.contact::before{content:"";position:absolute;left:50%;top:50%;width:70vmax;height:50vmax;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(109,74,255,.12),transparent 60%);pointer-events:none}
-.contact .wrap{position:relative}
-.contact h2{font-size:clamp(2.5rem,6vw,4rem);max-width:none;margin:0 auto 3rem}
-.big-btn{display:inline-block;background:var(--accent);color:#FFF;padding:1.25rem 2rem;border-radius:4px;text-decoration:none;font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:clamp(1.1rem,2.2vw,1.5rem);transition:box-shadow .3s,transform .1s}
-.big-btn:hover{box-shadow:0 0 40px rgba(109,74,255,.5)}
-.small{margin-top:1.5rem;color:var(--muted);font-size:.9rem}
-footer{padding:2.5rem 0;font-size:.85rem;color:var(--muted)}
-footer .wrap{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between}
-footer a{text-decoration:none;color:var(--silver);transition:color .2s}
-footer a:hover{color:var(--accent)}
+/* CONTACT */
+.contact{text-align:center}
+.contact h2{font-size:clamp(2.5rem,6vw,4.5rem);letter-spacing:-.02em;margin-bottom:1rem}
+.contact .sub{color:var(--gray);margin-bottom:2.5rem}
+.contact .email{display:inline-block;margin-top:1.5rem;font-family:'Space Grotesk';font-size:1.2rem;color:var(--silver);border-bottom:1px solid transparent;transition:all .2s}
+.contact .email:hover{color:var(--text);border-bottom-color:var(--accent)}
 
-/* Reveal */
-.js .reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
-.js .reveal.in{opacity:1;transform:none}
-@media(max-width:640px){.stats{grid-template-columns:1fr}}
-@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}.anim{opacity:1;transform:none}.js .reveal{opacity:1;transform:none}}
+footer{border-top:1px solid var(--line);padding:2rem 0;display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;font-size:.85rem;color:var(--gray)}
+footer a:hover{color:var(--text)}
+
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
 </style>
 </head>
 <body>
 
+<nav><div class="container nav-inner">
+  <a href="#" class="logo">OST<span>VARA</span></a>
+  <ul>
+    <li><a class="nav-link" href="#servicios">Servicios</a></li>
+    <li><a class="nav-link" href="#proyectos">Proyectos</a></li>
+    <li><a class="nav-link" href="#nosotros">Nosotros</a></li>
+    <li><a class="nav-link" href="#contacto">Contacto</a></li>
+  </ul>
+</div></nav>
+
 <header class="hero">
-  <div class="blob b1"></div>
-  <div class="blob b2"></div>
-  <div class="blob b3"></div>
-  <div class="wrap">
-    <p class="label anim d1">CREATIVE TECHNOLOGY STUDIO</p>
-    <h1 class="anim d2">OSTVARA</h1>
-    <p class="tagline anim d3">Ideas que se convierten en experiencias digitales.</p>
-    <div class="btns anim d4">
-      <a class="btn btn-primary" href="#proyectos">Ver proyectos</a>
-      <a class="btn btn-ghost" href="mailto:hola@ostvara.es">Contacto</a>
+  <div class="mesh"><div class="blob blob-1"></div><div class="blob blob-2"></div></div>
+  <div class="grid-lines"></div>
+  <div class="container hero-content">
+    <p class="eyebrow">Creative Technology Studio</p>
+    <h1>OSTVARA</h1>
+    <p class="tagline">Convertimos ideas en experiencias digitales con carácter: videojuegos, web, software y diseño 3D.</p>
+    <div class="btn-row">
+      <a class="btn btn-solid" href="#proyectos">Ver proyectos</a>
+      <a class="btn btn-outline" href="mailto:hello@ostvara.es">Contacto</a>
     </div>
   </div>
-  <div class="scroll-ind" aria-hidden="true"></div>
+  <div class="scroll-hint"></div>
 </header>
 
-<div class="marquee" aria-hidden="true">
-  <div class="track">
-    <span>GAMES</span><span class="dot">•</span><span>WEB</span><span class="dot">•</span><span>SOFTWARE</span><span class="dot">•</span><span>BRANDING</span><span class="dot">•</span><span>3D</span><span class="dot">•</span><span>ROBLOX</span><span class="dot">•</span><span>UI/UX</span><span class="dot">•</span>
-    <span>GAMES</span><span class="dot">•</span><span>WEB</span><span class="dot">•</span><span>SOFTWARE</span><span class="dot">•</span><span>BRANDING</span><span class="dot">•</span><span>3D</span><span class="dot">•</span><span>ROBLOX</span><span class="dot">•</span><span>UI/UX</span><span class="dot">•</span>
-  </div>
-</div>
+<div class="marquee"><div class="marquee-track">
+  GAMES<b>•</b>WEB<b>•</b>SOFTWARE<b>•</b>BRANDING<b>•</b>3D<b>•</b>ROBLOX<b>•</b>UI/UX<b>•</b>GAMES<b>•</b>WEB<b>•</b>SOFTWARE<b>•</b>BRANDING<b>•</b>3D<b>•</b>ROBLOX<b>•</b>UI/UX<b>•</b>
+</div></div>
 
-<section id="servicios">
-  <div class="wrap reveal">
-    <p class="label">LO QUE HACEMOS</p>
-    <h2>Servicios</h2>
-    <div class="grid">
-      <article class="card">
-        <svg viewBox="0 0 48 48"><rect x="6" y="15" width="36" height="18"/><path d="M14 24h6M17 21v6M30 22h.01M34 26h.01"/></svg>
-        <h3>Videojuegos</h3>
-        <p>Prototipos y juegos completos en Luau, Unity y Godot. Para PC, móvil y web.</p>
-      </article>
-      <article class="card">
-        <svg viewBox="0 0 48 48"><rect x="6" y="10" width="36" height="28"/><path d="M6 17h36M12 13h.01"/></svg>
-        <h3>Diseño web</h3>
-        <p>Sitios modernos, rápidos y optimizados para buscadores.</p>
-      </article>
-      <article class="card">
-        <svg viewBox="0 0 48 48"><rect x="6" y="8" width="36" height="32"/><path d="M14 20l6 5-6 5M24 31h10"/></svg>
-        <h3>Software a medida</h3>
-        <p>Automatizaciones, dashboards e integraciones API. Automatizamos lo repetitivo.</p>
-      </article>
-      <article class="card">
-        <svg viewBox="0 0 48 48"><path d="M24 8L40 36H8Z"/><circle cx="24" cy="28" r="4"/></svg>
-        <h3>Branding</h3>
-        <p>Logotipos, sistemas visuales y guidelines. Marcas con alma digital.</p>
-      </article>
-      <article class="card">
-        <svg viewBox="0 0 48 48"><path d="M24 6l16 9v18l-16 9-16-9V15z"/><path d="M24 24l16-9M24 24v18M24 24L8 15"/></svg>
-        <h3>Modelado 3D</h3>
-        <p>Assets optimizados, renders y visualizaciones en Blender y Three.js.</p>
-      </article>
-      <article class="card">
-        <svg viewBox="0 0 48 48"><path d="M24 8l16 8-16 8-16-8z"/><path d="M8 24l16 8 16-8M8 32l16 8 16-8"/></svg>
-        <h3>Recursos para juegos</h3>
-        <p>Modelos, texturas y UI kits para Roblox y FiveM. Listos para integrar.</p>
-      </article>
+<section id="servicios"><div class="container">
+  <p class="section-label reveal">Lo que hacemos</p>
+  <h2 class="section-title reveal">Diseño y código,<br>bajo el mismo techo.</h2>
+  <div class="services-grid">
+    <div class="card reveal"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M6 9l-3 3 3 3M18 9l3 3-3 3M14 5l-4 14"/></svg><h3>Videojuegos</h3><p>Prototipos y juegos completos. Roblox/Luau, Unity, Godot. PC, móvil y web.</p></div>
+    <div class="card reveal"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18M8 21h8"/></svg><h3>Diseño web</h3><p>Sitios modernos, rápidos y con SEO. React, Vue o vanilla según necesites.</p></div>
+    <div class="card reveal"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M4 17l6-6-6-6M12 19h8"/></svg><h3>Software a medida</h3><p>Dashboards, automatizaciones e integraciones API. Automatizamos lo aburrido.</p></div>
+    <div class="card reveal"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 010 18M7 12h10"/></svg><h3>Branding</h3><p>Logotipos, sistemas visuales y guidelines. Marcas con alma digital.</p></div>
+    <div class="card reveal"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M12 2l8 5v10l-8 5-8-5V7l8-5zM12 12l8-5M12 12L4 7M12 12v10"/></svg><h3>Modelado 3D</h3><p>Assets optimizados, renders y visualizaciones. Blender, Three.js, AR.</p></div>
+    <div class="card reveal"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M14 3l7 7-9 9H5v-7l9-9zM3 21h18"/></svg><h3>Recursos para juegos</h3><p>Modelos, texturas y UI kits para Roblox y FiveM. Listos para integrar.</p></div>
+  </div>
+</div></section>
+
+<section id="proyectos" style="background:#0D0D0E"><div class="container">
+  <p class="section-label reveal">Proyectos</p>
+  <h2 class="section-title reveal">Selected Work</h2>
+  <div class="portfolio-grid">
+    <a class="project reveal" href="mailto:hello@ostvara.es">
+      <img src="img/proyecto1.jpg" alt="Urban RP">
+      <div class="overlay"><span class="cat">Videojuego</span><h3>Urban RP</h3><p>Mundo urbano interactivo en Roblox con economía emergente y 50+ assets propios.</p></div>
+      <span class="badge">En desarrollo</span>
+    </a>
+    <a class="project reveal" href="mailto:hello@ostvara.es">
+      <img src="img/proyecto2.jpg" alt="Cloud Dashboard">
+      <div class="overlay"><span class="cat">Software</span><h3>Cloud Dashboard</h3><p>Panel de monitorización en tiempo real con gráficas y alertas push.</p></div>
+      <span class="badge">Prototipo</span>
+    </a>
+    <a class="project reveal" href="mailto:hello@ostvara.es">
+      <img src="img/proyecto3.jpg" alt="Game Assets">
+      <div class="overlay"><span class="cat">3D</span><h3>Game Assets Pack</h3><p>Colección modular de 30+ modelos low-poly con texturas PBR 2K.</p></div>
+      <span class="badge">En desarrollo</span>
+    </a>
+  </div>
+</div></section>
+
+<section id="nosotros"><div class="container">
+  <div class="about-split">
+    <div>
+      <p class="section-label reveal">Quiénes somos</p>
+      <h2 class="section-title reveal">Diseñadores que programan.<br>Ingenieros que crean.</h2>
+      <p class="reveal">OSTVARA es un estudio independiente multidisciplinar donde diseño, ingeniería y producción 3D convergen. Somos híbridos: entendemos la estética y también la implementación técnica.</p>
+      <p class="reveal">Trabajamos en ciclos cortos: descubrimiento → prototipo → prueba → refinamiento. Sin burocracia, sin jerga, sin promesas vacías.</p>
     </div>
+    <div class="about-img reveal"><img src="img/about.jpg" alt="Estudio OSTVARA"></div>
   </div>
-</section>
+  <div class="stats">
+    <div class="stat reveal"><div class="num">6</div><div class="lbl">Disciplinas</div></div>
+    <div class="stat reveal"><div class="num">3</div><div class="lbl">Proyectos activos</div></div>
+    <div class="stat reveal"><div class="num">24h</div><div class="lbl">Tiempo de respuesta</div></div>
+  </div>
+</div></section>
 
-<section id="proyectos">
-  <div class="wrap reveal">
-    <p class="label">PROYECTOS</p>
-    <h2>Trabajo seleccionado</h2>
-    <div class="work">
-      <article class="proj">
-        <img src="img/proyecto1.jpg" alt="Urban RP" loading="lazy">
-        <span class="badge">En desarrollo</span>
-        <div class="txt">
-          <p class="cat">Videojuego · Roblox</p>
-          <h3>Urban RP</h3>
-          <p>Mundo urbano interactivo con economía emergente y NPCs con IA básica.</p>
-        </div>
-      </article>
-      <article class="proj">
-        <img src="img/proyecto2.jpg" alt="Cloud Dashboard" loading="lazy">
-        <div class="txt">
-          <p class="cat">Software · SaaS</p>
-          <h3>Cloud Dashboard</h3>
-          <p>Panel de monitorización en tiempo real con gráficos D3.js y alertas push.</p>
-        </div>
-      </article>
-      <article class="proj">
-        <img src="img/proyecto3.jpg" alt="Game Assets Pack" loading="lazy">
-        <div class="txt">
-          <p class="cat">3D · Low-poly</p>
-          <h3>Game Assets Pack</h3>
-          <p>30+ modelos modulares con texturas PBR 2K para Unity, Unreal y Godot.</p>
-        </div>
-      </article>
-    </div>
-  </div>
-</section>
+<section id="contacto" class="contact"><div class="container">
+  <p class="section-label reveal">Contacto</p>
+  <h2 class="reveal">¿Tienes un proyecto en mente?</h2>
+  <p class="sub reveal">Construyamos algo excepcional juntos.</p>
+  <a class="btn btn-accent reveal" href="mailto:hello@ostvara.es">Iniciar conversación</a>
+  <br><a class="email reveal" href="mailto:hello@ostvara.es">hello@ostvara.es</a>
+</div></section>
 
-<section id="quienes">
-  <div class="wrap">
-    <div class="split">
-      <div class="reveal">
-        <p class="label">QUIÉNES SOMOS</p>
-        <h2>Diseño y código bajo el mismo techo.</h2>
-        <p>Somos un estudio independiente multidisciplinar donde diseño, ingeniería y producción 3D convergen. Somos híbridos: entendemos tanto la estética como la implementación técnica.</p>
-        <p>Trabajamos en ciclos iterativos cortos: descubrimiento, prototipo, prueba y refinamiento. Sin burocracia, sin jerga corporativa, sin promesas vacías.</p>
-      </div>
-      <div class="frame reveal">
-        <img src="img/about.jpg" alt="Visual abstracto de OSTVARA" loading="lazy">
-      </div>
-    </div>
-    <div class="stats reveal">
-      <div class="stat"><div class="num">6</div><div class="lbl">Disciplinas</div></div>
-      <div class="stat"><div class="num">3</div><div class="lbl">Proyectos activos</div></div>
-      <div class="stat"><div class="num">24h</div><div class="lbl">Tiempo de respuesta</div></div>
-    </div>
-  </div>
-</section>
-
-<section class="contact" id="contacto">
-  <div class="wrap reveal">
-    <h2>¿Tienes un proyecto en mente?</h2>
-    <a class="big-btn" href="mailto:hola@ostvara.es">hola@ostvara.es</a>
-    <p class="small">Respondemos en menos de 24 horas.</p>
-  </div>
-</section>
-
-<footer>
-  <div class="wrap">
-    <span>© 2026 OSTVARA. Todos los derechos reservados.</span>
-    <nav><a href="#servicios">Servicios</a> • <a href="#proyectos">Proyectos</a> • <a href="#quienes">Quiénes somos</a></nav>
-  </div>
-</footer>
+<footer><div class="container" style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem">
+  <span>© 2026 OSTVARA. All rights reserved.</span>
+  <span><a href="#servicios">Servicios</a> · <a href="#proyectos">Proyectos</a> · <a href="#nosotros">Nosotros</a></span>
+</div></footer>
 
 <script>
-const io = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e); }
-  });
-}, { threshold: 0.12 });
-document.querySelectorAll('.reveal').forEach((el, i) => {
-  el.style.transitionDelay = ((i % 3) * 0.1) + 's';
-  io.observe(el);
-});
+const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 </script>
 </body>
 </html>
