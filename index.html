@@ -21,6 +21,7 @@ nav a:hover{color:var(--accent)}
 
 /* HERO con ciudad 3D */
 .hero{height:100vh;position:relative;overflow:hidden}
+.hero-fallback{position:absolute;inset:0;background:url('img/proyecto1.jpg') center/cover;opacity:.4;filter:saturate(.7)}
 #city{position:absolute;inset:0;cursor:grab}
 #city:active{cursor:grabbing}
 .hero-content{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;justify-content:flex-end;padding:0 3rem 5.5rem;pointer-events:none}
@@ -81,6 +82,7 @@ footer{padding:2rem 3rem;display:flex;justify-content:space-between;font-size:.7
 
 <!-- HERO -->
 <section class="hero" id="top">
+  <div class="hero-fallback"></div>
   <div id="city"></div>
   <div class="hero-content">
     <p class="kicker reveal">Creative technology studio — Est. 2026</p>
@@ -152,10 +154,19 @@ footer{padding:2rem 3rem;display:flex;justify-content:space-between;font-size:.7
   <span>hello@ostvara.es</span>
 </footer>
 
+<!-- Animación de texto: independiente de la ciudad 3D, funciona siempre -->
+<script>
+const observer = new IntersectionObserver(es => {
+  es.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.15 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+<!-- Ciudad 3D (Three.js) -->
 <script type="importmap">
 {"imports":{
-  "three":"https://unpkg.com/three@0.161.0/build/three.module.js",
-  "three/addons/":"https://unpkg.com/three@0.161.0/examples/jsm/"
+  "three":"https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.module.js",
+  "three/addons/":"https://cdn.jsdelivr.net/npm/three@0.161.0/examples/jsm/"
 }}
 </script>
 
@@ -238,4 +249,240 @@ function makeGround(){
   c.fillStyle='#cfcfcf';
   for(let i=0;i<6;i++){const o=road+sw+2+i*7;c.fillRect(o,0,4,road*0.9);c.fillRect(0,o,road*0.9,4);}
   const r=rng(11);
-  for(let i=0;i<4000;i++){c.fillStyle=`rgba(255,255,255,${r()*0.03})`;c.fill
+  for(let i=0;i<4000;i++){c.fillStyle=`rgba(255,255,255,${r()*0.03})`;c.fillRect(r()*S,r()*S,2,2);}
+  const t=toTex(cc);
+  const n=(RANGE*2*STEP*2.5)/BLOCK;
+  t.repeat.set(n,n);
+  return {tex:t,size:n*BLOCK};
+}
+
+function genCity(){
+  const r=rng(42);
+  const parts=[];
+  for(let i=-RANGE;i<=RANGE;i++){
+    for(let j=-RANGE;j<=RANGE;j++){
+      if(i%4===0||j%4===0)continue;
+      const x=i*STEP,z=j*STEP;
+      const dist=Math.hypot(x,z);
+      if(r()<0.06+dist/140)continue;
+      const core=Math.max(0,1-dist/22);
+      let h=1+r()*3+core*core*(6+r()*22);
+      if(dist<14&&r()>0.9)h+=10+r()*14;
+      h=Math.max(1,Math.round(h/2)*2);
+      const kind=h>=12?'glass':h>=5?(r()<0.6?'office':'glass'):(r()<0.7?'resi':'office');
+      const w=r()<0.5?1.7:2.1;
+      if(kind==='glass'&&h>=16){
+        const base=Math.round((h*0.72)/2)*2;
+        parts.push({x,y:0,z,w,h:base,kind});
+        parts.push({x,y:base,z,w:w*0.72,h:Math.max(2,h-base),kind});
+      } else parts.push({x,y:0,z,w,h,kind});
+    }
+  }
+  const tops=parts.filter(p=>p.y+p.h>=18).map(p=>[p.x,p.y+p.h+0.15,p.z]);
+  return {parts,tops};
+}
+
+function buildBuildings(scene,parts){
+  const facades={glass:makeFacade('glass',5),office:makeFacade('office',9),resi:makeFacade('resi',13)};
+  const roofMat=new THREE.MeshStandardMaterial({map:makeRoof(),roughness:0.9,metalness:0.1});
+  const geo=new THREE.BoxGeometry(1,1,1).translate(0,0.5,0);
+  const r=rng(77);
+  const map=new Map();
+  for(const p of parts){
+    const key=`${p.kind}-${p.w.toFixed(2)}-${p.h}`;
+    let b=map.get(key);
+    if(!b){
+      const f=facades[p.kind];
+      const m=f.map.clone(),e=f.emissive.clone();
+      const ox=r(),oy=Math.floor(r()*12)/12;
+      for(const t of [m,e]){t.repeat.set(p.w,p.h/TILE_H);t.offset.set(ox,oy);t.needsUpdate=true;}
+      const side=new THREE.MeshStandardMaterial({
+        map:m,emissiveMap:e,emissive:new THREE.Color('#ffffff'),emissiveIntensity:1.0,
+        roughness:p.kind==='glass'?0.12:p.kind==='office'?0.55:0.85,
+        metalness:p.kind==='glass'?0.85:0.15,
+        envMapIntensity:p.kind==='glass'?1.4:0.5
+      });
+      b={parts:[],mats:[side,side,roofMat,roofMat,side,side]};
+      map.set(key,b);
+    }
+    b.parts.push(p);
+  }
+  const m4=new THREE.Matrix4(),q=new THREE.Quaternion(),s=new THREE.Vector3();
+  for(const b of map.values()){
+    const mesh=new THREE.InstancedMesh(geo,b.mats,b.parts.length);
+    b.parts.forEach((p,i)=>{
+      s.set(p.w,p.h,p.w);
+      m4.compose(new THREE.Vector3(p.x,p.y,p.z),q,s);
+      mesh.setMatrixAt(i,m4);
+    });
+    mesh.instanceMatrix.needsUpdate=true;
+    scene.add(mesh);
+  }
+}
+
+function buildStreetLights(scene){
+  const pts=[];
+  for(let k=-RANGE;k<=RANGE;k+=4){
+    const s=k*STEP;
+    for(let t=-lim;t<=lim;t+=STEP){
+      pts.push([s-1,t],[s+1,t+STEP/2],[t,s-1],[t+STEP/2,s+1]);
+    }
+  }
+  const mesh=new THREE.InstancedMesh(
+    new THREE.SphereGeometry(0.05,6,6),
+    new THREE.MeshBasicMaterial({color:'#ffb070',toneMapped:false}),
+    pts.length
+  );
+  const m=new THREE.Matrix4();
+  pts.forEach(([x,z],i)=>{m.makeTranslation(x,0.45,z);mesh.setMatrixAt(i,m);});
+  mesh.instanceMatrix.needsUpdate=true;
+  scene.add(mesh);
+}
+
+function buildTraffic(scene){
+  const N=260;
+  const r=rng(99);
+  const cars=Array.from({length:N},()=>{
+    const street=(Math.floor(r()*9)-4)*4*STEP;
+    const dir=r()<0.5?1:-1;
+    return {axis:r()<0.5?0:1,street,lane:dir*0.35,dir,t:(r()*2-1)*lim,v:1.2+r()*1.6};
+  });
+  const mesh=new THREE.InstancedMesh(
+    new THREE.BoxGeometry(0.16,0.05,0.32),
+    new THREE.MeshBasicMaterial({toneMapped:false}),
+    N
+  );
+  const col=new THREE.Color();
+  cars.forEach((c,i)=>mesh.setColorAt(i,col.set(c.dir>0?'#fff3dc':'#ff2a1a')));
+  mesh.instanceColor.needsUpdate=true;
+  scene.add(mesh);
+  const m=new THREE.Matrix4(),q=new THREE.Quaternion(),s=new THREE.Vector3(1,1,1),p=new THREE.Vector3(),yAxis=new THREE.Vector3(0,1,0);
+  return (dt)=>{
+    dt=Math.min(dt,0.05);
+    cars.forEach((c,i)=>{
+      c.t+=c.v*c.dir*dt;
+      if(c.t>lim)c.t=-lim;
+      if(c.t<-lim)c.t=lim;
+      if(c.axis===0)p.set(c.street+c.lane,0.08,c.t);else p.set(c.t,0.08,c.street+c.lane);
+      q.setFromAxisAngle(yAxis,c.axis===0?0:Math.PI/2);
+      m.compose(p,q,s);
+      mesh.setMatrixAt(i,m);
+    });
+    mesh.instanceMatrix.needsUpdate=true;
+  };
+}
+
+function buildAviation(scene,tops){
+  if(!tops.length)return ()=>{};
+  const mesh=new THREE.InstancedMesh(
+    new THREE.SphereGeometry(0.09,8,8),
+    new THREE.MeshBasicMaterial({toneMapped:false}),
+    tops.length
+  );
+  const m=new THREE.Matrix4();
+  tops.forEach(([x,y,z],i)=>{m.makeTranslation(x,y,z);mesh.setMatrixAt(i,m);});
+  mesh.instanceMatrix.needsUpdate=true;
+  scene.add(mesh);
+  return (elapsed)=>{
+    mesh.material.color.setRGB(Math.sin(elapsed*2.2)>0.4?3:0.15,0,0);
+  };
+}
+
+function buildEnvironment(renderer,scene){
+  const pmrem=new THREE.PMREMGenerator(renderer);
+  const env=new THREE.Scene();
+  const pf=(color,intensity,pos,scale,rot)=>{
+    const mat=new THREE.MeshBasicMaterial({color});
+    mat.color.multiplyScalar(intensity);
+    const mesh=new THREE.Mesh(new THREE.PlaneGeometry(1,1),mat);
+    mesh.position.set(...pos);mesh.scale.set(...scale);
+    if(rot)mesh.rotation.set(...rot);
+    env.add(mesh);
+  };
+  pf(PURPLE,1.2,[0,4,-40],[120,8,1]);
+  pf(COOL,0.6,[0,30,0],[60,60,1],[Math.PI/2,0,0]);
+  pf(WARM,0.8,[40,2,10],[80,3,1],[0,-Math.PI/2,0]);
+  scene.environment=pmrem.fromScene(env,0.04).texture;
+  env.traverse(o=>{if(o.geometry)o.geometry.dispose();if(o.material)o.material.dispose();});
+  pmrem.dispose();
+}
+
+function initCity(){
+  const container=document.getElementById('city');
+  const coarse=window.matchMedia('(pointer: coarse)').matches;
+  const renderer=new THREE.WebGLRenderer({antialias:true,powerPreference:'high-performance'});
+  renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+  renderer.setSize(container.clientWidth,container.clientHeight);
+  renderer.toneMapping=THREE.ACESFilmicToneMapping;
+  container.appendChild(renderer.domElement);
+
+  const scene=new THREE.Scene();
+  scene.background=new THREE.Color(BG);
+  scene.fog=new THREE.Fog('#0c0b10',28,92);
+
+  const camera=new THREE.PerspectiveCamera(40,container.clientWidth/container.clientHeight,0.1,200);
+  camera.position.set(0,9,50);
+
+  scene.add(new THREE.HemisphereLight('#2a3550','#0a0a0a',0.35));
+  const dl=new THREE.DirectionalLight('#9fb2d6',0.5);dl.position.set(-30,40,-20);scene.add(dl);
+  const pl=new THREE.PointLight(WARM,60,40,1.5);pl.position.set(0,3,0);scene.add(pl);
+
+  buildEnvironment(renderer,scene);
+
+  const {parts,tops}=genCity();
+  buildBuildings(scene,parts);
+  buildStreetLights(scene);
+  const updateTraffic=buildTraffic(scene);
+  const updateAviation=buildAviation(scene,tops);
+
+  // Calle mojada: espejo + capa de asfalto semitransparente encima
+  const ground=makeGround();
+  const mirror=new Reflector(new THREE.PlaneGeometry(ground.size,ground.size),{
+    textureWidth:1024,textureHeight:1024,color:0x777777
+  });
+  mirror.rotation.x=-Math.PI/2;mirror.position.y=-0.02;
+  scene.add(mirror);
+  const road=new THREE.Mesh(
+    new THREE.PlaneGeometry(ground.size,ground.size),
+    new THREE.MeshStandardMaterial({map:ground.tex,transparent:true,opacity:0.82,roughness:0.6,metalness:0.25})
+  );
+  road.rotation.x=-Math.PI/2;
+  scene.add(road);
+
+  const controls=new OrbitControls(camera,renderer.domElement);
+  controls.target.set(0,8,0);
+  controls.enableZoom=false;controls.enablePan=false;
+  controls.enableRotate=!coarse;
+  controls.enableDamping=true;controls.dampingFactor=0.06;
+  controls.autoRotate=true;controls.autoRotateSpeed=0.35;
+  controls.minPolarAngle=0.85;controls.maxPolarAngle=1.42;
+
+  const composer=new EffectComposer(renderer);
+  composer.addPass(new RenderPass(scene,camera));
+  composer.addPass(new UnrealBloomPass(new THREE.Vector2(container.clientWidth,container.clientHeight),0.7,0.4,0.75));
+  const vig=new ShaderPass(VignetteShader);
+  vig.uniforms.offset.value=0.25;vig.uniforms.darkness.value=0.8;
+  composer.addPass(vig);
+  composer.addPass(new OutputPass());
+
+  addEventListener('resize',()=>{
+    camera.aspect=container.clientWidth/container.clientHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(container.clientWidth,container.clientHeight);
+    composer.setSize(container.clientWidth,container.clientHeight);
+  });
+
+  const clock=new THREE.Clock();
+  renderer.setAnimationLoop(()=>{
+    const dt=clock.getDelta(),t=clock.elapsedTime;
+    controls.update();
+    updateTraffic(dt);
+    updateAviation(t);
+    composer.render();
+  });
+}
+
+try{initCity();}catch(err){console.warn('Ciudad 3D no disponible, se muestra la imagen de fondo:',err);}
+</script>
+</body>
+</html>
