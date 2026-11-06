@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>OSTVARA — Creative Technology Studio</title>
 <meta name="description" content="Games, software and 3D assets — engineered like instruments, shaped like stories.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@300;400&display=swap" rel="stylesheet">
 <style>
@@ -15,7 +16,9 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-
 h1,h2,h3{font-family:'Space Grotesk',sans-serif}
 
 header{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.5rem 3rem;mix-blend-mode:difference}
-.logo{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.1rem;letter-spacing:.2em;text-decoration:none;color:var(--text)}
+.logo{display:flex;align-items:center;gap:.8rem;text-decoration:none}
+.logo svg{flex-shrink:0}
+.logo span{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.1rem;letter-spacing:.2em;color:var(--text)}
 nav a{color:var(--silver);text-decoration:none;font-size:.8rem;letter-spacing:.15em;margin-left:2rem;text-transform:uppercase;transition:color .3s}
 nav a:hover{color:var(--accent)}
 
@@ -52,7 +55,8 @@ nav a:hover{color:var(--accent)}
 .btn{display:inline-block;background:var(--accent);color:var(--text);text-decoration:none;font-family:'Space Grotesk',sans-serif;font-weight:500;letter-spacing:.1em;padding:1.2rem 3.2rem;border-radius:999px;font-size:1rem;transition:transform .3s,box-shadow .3s}
 .btn:hover{transform:translateY(-3px);box-shadow:0 10px 40px rgba(109,74,255,.45)}
 
-footer{padding:2rem 3rem;display:flex;justify-content:space-between;font-size:.75rem;letter-spacing:.1em;color:var(--silver);border-top:1px solid rgba(184,184,192,.1)}
+footer{padding:2rem 3rem;display:flex;justify-content:space-between;align-items:center;font-size:.75rem;letter-spacing:.1em;color:var(--silver);border-top:1px solid rgba(184,184,192,.1)}
+footer .foot-logo{display:flex;align-items:center;gap:.5rem}
 
 .reveal{opacity:0;transform:translateY(40px);transition:opacity .9s ease,transform .9s ease}
 .reveal.visible{opacity:1;transform:translateY(0)}
@@ -71,7 +75,13 @@ footer{padding:2rem 3rem;display:flex;justify-content:space-between;font-size:.7
 <body>
 
 <header>
-  <a class="logo" href="#">OSTVARA</a>
+  <a class="logo" href="#">
+    <svg width="26" height="26" viewBox="0 0 64 64" aria-hidden="true">
+      <rect x="8" y="26" width="30" height="30" fill="#B8B8C0"/>
+      <rect x="42" y="8" width="26" height="26" fill="#6d4aff"/>
+    </svg>
+    <span>OSTVARA</span>
+  </a>
   <nav>
     <a href="#studio">Studio</a>
     <a href="#work">Work</a>
@@ -150,7 +160,13 @@ footer{padding:2rem 3rem;display:flex;justify-content:space-between;font-size:.7
 </section>
 
 <footer>
-  <span>© 2026 OSTVARA</span>
+  <span class="foot-logo">
+    <svg width="16" height="16" viewBox="0 0 64 64" aria-hidden="true">
+      <rect x="8" y="26" width="30" height="30" fill="#B8B8C0"/>
+      <rect x="42" y="8" width="26" height="26" fill="#6d4aff"/>
+    </svg>
+    © 2026 OSTVARA
+  </span>
   <span>hello@ostvara.es</span>
 </footer>
 
